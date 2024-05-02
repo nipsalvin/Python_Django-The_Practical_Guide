@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include 'challenges/includes/header.html' %}
+
     <h1>{{month | title}}'s Challenge</h1>
     
     {% if text != None %}
