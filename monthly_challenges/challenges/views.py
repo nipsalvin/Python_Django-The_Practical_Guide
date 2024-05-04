@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, Http404
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -17,29 +18,28 @@ monthly_challenges = {
     'september': 'Run atleast 50 KM this month',
     'october': 'Walk for atleast 20 mins each day!',
     'november': 'Learn python for atleast 20 mins each day!',
-    'december': 'Read 5 pages of a book daily',
+    'december': None,
 }
 
 
 def index(request):
-    months_list = ''
+    context_data = {}
     months = list(monthly_challenges.keys())
-
-    for month in months:
-        capitalized_month = month.title()
-        month_path = reverse(viewname='month-challenge', args=[month])
-        months_list += f'<li><a href="{month_path}">{capitalized_month}</a></li>'
-    response_data = f'<ul>{months_list}</ul>'
-    return HttpResponse(content=response_data)
+    context_data['months'] = months
+    return render(request, 'challenges/index.html', context_data)
 
 
 def monthly_challenge(request, month):
     try:
+        context_data = {}
         challenge_text = monthly_challenges[month]
-        respose_data = f'<h1>{month.title()}: {challenge_text.title()}</h1>'
-        return HttpResponse(respose_data)
+        context_data['text'] = challenge_text
+        context_data['month'] = month
+        return render(request=request, template_name='challenges/challenge.html', context=context_data)
     except:
-        return HttpResponseNotFound('<h1>This is not a valid month</h1>')
+        # response_data = render_to_string('404.html')
+        # return HttpResponseNotFound(response_data)
+        raise Http404() #When using `raise Http404`, you need to set Debug=False
 
 
 def monthly_challenge_by_number(request, month):
@@ -52,4 +52,6 @@ def monthly_challenge_by_number(request, month):
         # We can do this
         return HttpResponseRedirect(redirect_to=redirect_path)
     except:
-        return HttpResponseNotFound(content='<h1>This is not a valid month</h1>')
+        # response_data = render_to_string('404.html')
+        # return HttpResponseNotFound(content=response_data)
+        raise Http404() #When using `raise Http404`, you need to set Debug=False
