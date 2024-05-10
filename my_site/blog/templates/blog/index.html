@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Blog
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header id="main-navigation">
+        <h1>
+            <a href="{% url 'index'%}">Alvin's Blog</a>
+        </h1>
+        <nav>
+            <a href="{% url 'all_posts' %}">All Posts</a>
+        </nav>
+    </header>
+    
+    <section id="welcome">
+        <header>
+            <img src="" alt="Alvin - The author ofthe Blog">
+            <h2>NIPS' BLOG</h2>
+        </header>
+        <p>Hi, I'm Alvin. I love Coding and Boxing</p>
+    </section>
+
+    <section id="latest-posts">
+        <h2>My Latest Thoughts</h2>
+
+        <ul>
+            <li>
+                <article class="post">
+                    <a href="">
+                        <img alt="mountain hiking">
+                        <div class="post__content">
+                            <h3>Mountain Hiking</h3>
+                            <p>This is my first Blog Post</p>
+                        </div>
+                    </a>
+                </article>
+            </li>
+        </ul>
+    </section>
+
+    <section id="about">
+        <h2>What Do I Do</h2>
+        <p>
+            I love coding and working out
+        </p>
+    </section>
+
+{% endblock %}
