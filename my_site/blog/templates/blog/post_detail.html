@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+This Post Title
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog/post-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="summary">
+        <h2>Post Title</h2>
+        <article>
+            <img src="{% static 'blog/images/mountains.jpg' %}" alt="Post Title">
+            <address>By Nips</address>
+            <div>
+                Last Updated on <time>16/May</time>
+            </div>
+        </article>
+    </section>
+
+    <main>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Aperiam quis id ducimus modi sapiente delectus sint quo voluptatum. 
+            Ex consequuntur sunt porro dolorem ratione quibusdam tempora qui sed unde. Perspiciatis.
+        </p>
+
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Aperiam quis id ducimus modi sapiente delectus sint quo voluptatum. 
+            Ex consequuntur sunt porro dolorem ratione quibusdam tempora qui sed unde. Perspiciatis.
+        </p>
+
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Aperiam quis id ducimus modi sapiente delectus sint quo voluptatum. 
+            Ex consequuntur sunt porro dolorem ratione quibusdam tempora qui sed unde. Perspiciatis.
+        </p>
+
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Aperiam quis id ducimus modi sapiente delectus sint quo voluptatum. 
+            Ex consequuntur sunt porro dolorem ratione quibusdam tempora qui sed unde. Perspiciatis.
+        </p>
+    </main>
+{% endblock %}

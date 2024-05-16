@@ -8,5 +8,5 @@ def index(request):
 def all_posts(request):
     return render(request=request, template_name='blog/all_posts.html')
 
-def post_details(request):
-    pass
+def post_details(request, slug):
+    return render(request=request, template_name='blog/post_detail.html')
