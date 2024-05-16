@@ -2,12 +2,12 @@
 
 <li>
     <article class="post">
-        <a href="{% url 'post_details' 'the-mountains' %}">
+        <a href="{% url 'post_details' post.slug %}">
         <!-- {% comment %}<a href="{% url 'post_details' slug='the-mountainrs' %}"> You can also send the slug as a kwarg {% endcomment %} -->
-            <img src="{% static 'blog/images/mountains.jpg' %}" alt="mountain hiking">
+            <img src="{% static 'blog/images/'|add:post.image %}" alt="{{ post.title}}">
             <div class="post__content">
-                <h3>Mountain Hiking</h3>
-                <p>This is my first Blog Post</p>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.excerpt }}</p>
             </div>
         </a>
     </article>
