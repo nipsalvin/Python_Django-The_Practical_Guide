@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Blog
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog/post.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="welcome">
+        <header>
+            <img src="{% static '/blog/images/alvin.jpg' %}" alt="Alvin - The author ofthe Blog">
+            <h2>NIPS' BLOG</h2>
+        </header>
+        <p>Hi, I'm Alvin. I love Coding and Boxing</p>
+    </section>
+
+    <section id="latest-posts">
+        <h2>My Latest Thoughts</h2>
+
+        <ul>
+            {% for post in posts %}
+                {% include 'blog/includes/post.html' %}
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="about">
+        <h2>What Do I Do</h2>
+        <p>
+            I love coding and working out
+        </p>
+    </section>
+
+{% endblock %}
