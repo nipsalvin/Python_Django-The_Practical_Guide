@@ -84,7 +84,17 @@ def all_posts(request):
     return render(request=request, template_name='blog/all_posts.html', context=context)
 
 
-def post_details(request, slug):
+def post_details(request, slug):    
+    """
+    Retrieves the post details based on the provided slug.
+    
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+        slug (str): The unique identifier of the post.
+        
+    Returns:
+        HttpResponse: The rendered post details template with the context containing the identified post.
+    """
     # blog_post = [post for post in blog_posts if post['slug'] == slug]
     # identified_post = blog_post[0]
     # context = {'post':identified_post}
