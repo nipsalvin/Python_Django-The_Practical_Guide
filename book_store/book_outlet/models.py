@@ -23,7 +23,7 @@ class Book(models.Model):
 
         :rtype: str
         """
-        return reverse('book_detail', args=[self.id])
+        return reverse('book_detail', args=[self.slug])
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
