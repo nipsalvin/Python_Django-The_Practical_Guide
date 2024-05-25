@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.urls import reverse
 
 
 class Book(models.Model):
@@ -11,3 +12,13 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title} - ({self.rating})"
+    
+    def get_absolute_url(self):
+        """
+        Returns the absolute URL for the book detail page by using reverse to call the function's name and pass the id as an argument
+
+        :return: A string representing the absolute URL for the book detail page.
+        
+        :rtype: str
+        """
+        return reverse('book_detail', args=[self.id])
