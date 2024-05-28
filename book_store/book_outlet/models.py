@@ -3,12 +3,19 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.urls import reverse
 from django.utils.text import slugify
 
+class Author(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.last_name}"
 
 class Book(models.Model):
     title = models.CharField(max_length=50) 
     rating = models.IntegerField()
         # validators=[MinLengthValidator(1), MaxLengthValidator(5)])
-    author = models.CharField(max_length=50, null=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     is_bestselling = models.BooleanField(default=False)
     # slug = models.SlugField(default="", blank=True ,null=False, db_index=True, editable=False) #Slugify converts "Book Title" to "book-title"
     slug = models.SlugField(default="", blank=True ,null=False, db_index=True) #Slugify converts "Book Title" to "book-title"
