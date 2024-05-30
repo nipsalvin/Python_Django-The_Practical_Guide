@@ -3,6 +3,15 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.urls import reverse
 from django.utils.text import slugify
 
+class Country(models.Model):
+    name = models.CharField(max_length=80)
+    code = models.CharField(max_length=2)
+
+    class Meta:
+        verbose_name_plural = "Countries"
+
+    def __str__(self) -> str:
+        return f'{self.name}'
 
 class Address(models.Model):
     street = models.CharField(max_length=80)
@@ -34,6 +43,7 @@ class Book(models.Model):
     is_bestselling = models.BooleanField(default=False)
     # slug = models.SlugField(default="", blank=True ,null=False, db_index=True, editable=False) #Slugify converts "Book Title" to "book-title"
     slug = models.SlugField(default="", blank=True ,null=False, db_index=True) #Slugify converts "Book Title" to "book-title"
+    published_country = models.ManyToManyField(Country, null=True)
 
     def __str__(self) -> str:
         return f"{self.title} - ({self.rating})"
