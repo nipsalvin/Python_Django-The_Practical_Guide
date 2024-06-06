@@ -8,11 +8,7 @@
 <body>
     <form method="POST" action="/">
         {% csrf_token %}
-        {% if has_error %}
-            <p style="color: red; border: 1px solid red;">Your username must not be empty!</p>
-        {% endif %}
-        <label for="username">Your Username</label>
-        <input type="text" name="username" id="username">
+        {{ form.as_p }}
         <button>Submit</button>
     </form>
 </body>
