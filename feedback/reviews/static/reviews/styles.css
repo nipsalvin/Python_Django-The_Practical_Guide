@@ -29,7 +29,7 @@ button:active {
 }
 
 .form-control {
-    margin: 1rem;
+    margin-bottom: 1rem;
 }
 
 .form-control input {
@@ -49,6 +49,22 @@ button:active {
 
 .form-control label {
     font-weight: bold;
-    margin-bottom: 0.5rem;
     display: block;
+    margin-bottom: 0.5rem;
+}
+
+.errorlist {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0;
+    color: #680000;
+}
+
+.errors input {
+    border-color: #680000;
+    background-color: #fde3e3;
+}
+
+.errors label {
+    color: #680000;
 }
