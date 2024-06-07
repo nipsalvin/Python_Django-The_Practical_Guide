@@ -16,6 +16,16 @@
             {{ form.username }}
             {{ form.username.errors }}
         </div>
+        <div class="form-control {% if form.review_text.errors %}errors{% endif %}">
+            {{ form.review_text.label_tag }}
+            {{ form.review_text }}
+            {{ form.review_text.errors }}
+        </div>
+        <div class="form-control {% if form.rating.errors %}errors{% endif %}">
+            {{ form.rating.label_tag }}
+            {{ form.rating }}
+            {{ form.rating.errors }}
+        </div>
         <button>Submit</button>
     </form>
 </body>
