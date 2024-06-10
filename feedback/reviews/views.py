@@ -1,23 +1,34 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import ReviewForm
-from .models import Review
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import FormView
+
+from .forms import ReviewForm
+from .models import Review
 
 # Create your views here.
 
-class ReviewView(View):
-    def get(self, request):
-        form = ReviewForm()
-        return render(request, 'reviews/review.html', {'form': form})
+class ReviewView(FormView):
+    template_name = 'reviews/review.html'
+    form_class = ReviewForm
+    success_url = '/thank_you/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+# class ReviewView(View):
+#     def get(self, request):
+#         form = ReviewForm()
+#         return render(request, 'reviews/review.html', {'form': form})
     
-    def post(self, request):
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            form.save() #Since we are now using a ModelForm, we don't need to create an object, we can just save the form
-            return HttpResponseRedirect('/thank_you/')
-        return render(request, 'reviews/review.html', {'form': form})
+#     def post(self, request):
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             form.save() #Since we are now using a ModelForm, we don't need to create an object, we can just save the form
+#             return HttpResponseRedirect('/thank_you/')
+#         return render(request, 'reviews/review.html', {'form': form})
 
 # def review(request):
 #     # if request.method == 'POST':
