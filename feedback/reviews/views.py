@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import ReviewForm
 from .models import Review
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 # Create your views here.
 
@@ -60,10 +60,29 @@ class ThankYouView(TemplateView):
         context['message'] = 'This works!'
         return context
 
-class ReviewListView(TemplateView):
+# class ReviewListView(TemplateView):
+#     template_name = 'reviews/review_list.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['reviews'] = Review.objects.all()
+#         return context
+
+class ReviewListView(ListView):
+    model = Review
     template_name = 'reviews/review_list.html'
+    context_object_name = 'reviews'
+
+    def get_queryset(self):
+        base_queryset = super().get_queryset()
+        data = base_queryset.filter(rating__gte=1)
+        return data
+
+class SingleReviewView(TemplateView):
+    template_name = 'reviews/single_review.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reviews'] = Review.objects.all()
+        review_id = kwargs['pk']
+        context['review'] = Review.objects.get(id=review_id)
         return context
