@@ -129,3 +129,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/user_media/'
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 #Sets age of session. Default is 2 weeks
