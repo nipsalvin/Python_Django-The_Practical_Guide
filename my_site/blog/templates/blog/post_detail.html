@@ -31,4 +31,12 @@
             {{ post.content|linebreaks }}
         </p>
     </main>
+
+    <div>
+        <form action="">
+            {% csrf_token %}
+            {{ comment_form }}
+            <button>Save Comment</button>
+        </form>
+    </div>
 {% endblock %}

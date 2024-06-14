@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, TemplateView
+from .forms import CommentForm
 
 from .models import Post, Author, Tag
 
@@ -55,4 +56,5 @@ class PostDetails(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_tags'] = self.object.tags.all()
+        context['comment_form'] = CommentForm()
         return context
