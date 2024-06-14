@@ -32,11 +32,18 @@
         </p>
     </main>
 
-    <div>
+    <section id="comment-form">
+        <h2>Your Comment</h2>
         <form action="">
             {% csrf_token %}
-            {{ comment_form }}
-            <button>Save Comment</button>
+            {% for form_field in comment_form %}
+                <div class="form-control">
+                    {{ form_field.label_tag }}
+                    {{ form_field }}
+                    {{ form_field.errors }}
+                </div>
+            {% endfor %}
+            <button>Add Comment</button>
         </form>
-    </div>
+    </section>
 {% endblock %}
