@@ -63,7 +63,6 @@ class PostDetails(View):
         return render(request, self.template_name, context)
 
     def post(self, request, slug):
-        import ipdb; ipdb.set_trace()
         comment_form = CommentForm(request.POST)
         post = Post.objects.get(slug=slug)
         if comment_form.is_valid():
