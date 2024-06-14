@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, TemplateView
 from .forms import CommentForm
 
@@ -48,13 +50,30 @@ class AllPosts(ListView):
 #     context['post_tags'] = identified_post.tags.all()
 #     return render(request=request, template_name='blog/post_detail.html', context=context)
 
-class PostDetails(DetailView):
-    model = Post
+class PostDetails(View):
     template_name = 'blog/post_detail.html'
-    context_object_name = 'post'
+    
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            'post': post,
+            'post_tags': post.tags.all(),
+            'comment_form': CommentForm(),
+            }
+        return render(request, self.template_name, context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post_tags'] = self.object.tags.all()
-        context['comment_form'] = CommentForm()
-        return context
+    def post(self, request, slug):
+        import ipdb; ipdb.set_trace()
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return HttpResponseRedirect(reverse('post_details', args=[slug]))
+        context = {
+            'post': post,
+            'post_tags': post.tags.all(),
+            'comment_form': comment_form,
+            }
+        return render(request, self.template_name, context)
