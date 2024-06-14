@@ -10,6 +10,16 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if comment_form.errors %}
+        <div id="error-message">
+            <h2>There was an error with your submission</h2>
+            <p>
+                <a href="#comment-form">Fix Error</a>
+            </p>
+        </div>
+    {% endif %}
+
     <section id="summary">
         <h2>{{post.title}}</h2>
         <div>
@@ -37,7 +47,7 @@
         <form action="{% url 'post_details' post.slug %}" method="POST">
             {% csrf_token %}
             {% for form_field in comment_form %}
-                <div class="form-control">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %}">
                     {{ form_field.label_tag }}
                     {{ form_field }}
                     {{ form_field.errors }}

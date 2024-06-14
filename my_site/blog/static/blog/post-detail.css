@@ -120,3 +120,41 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
   }
+
+  .errorlist {
+    color: #d6000b;
+    margin: 0.5rem 0;
+    list-style: none;
+    padding: 0;
+  }
+
+  .invalid label {
+    color: #d6000b;
+    font-weight: bold;
+  }
+
+  .invalid input,
+  .invalid textarea {
+    border-color: #d6000b;
+    background-color: #f8d7da;
+  }
+
+  #error-message {
+    margin: 8rem auto 3rem auto;
+    border: 1px solid #d6000b;
+    background-color: #f8d7da;
+    padding: 0.5rem;
+    border-radius: 6px;
+    text-align: center;
+    width: 90%;
+    max-width: 40rem;
+  }
+
+  #error-message a {
+    text-decoration: none;
+    background-color: #d6000b;
+    border: 1px solid #d6000b;
+    color: white;
+    padding: 0.25rem 1.5rem;
+    border-radius: 6px;
+  }
