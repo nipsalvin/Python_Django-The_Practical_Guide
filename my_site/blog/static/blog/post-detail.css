@@ -158,3 +158,35 @@ body {
     padding: 0.25rem 1.5rem;
     border-radius: 6px;
   }
+
+  .comments {
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 60rem;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    padding : 1rem 2rem;
+  }
+
+  .comments ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .comments li {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .comments li:last-of-type {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .comments h2 {
+    color: #464646;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
