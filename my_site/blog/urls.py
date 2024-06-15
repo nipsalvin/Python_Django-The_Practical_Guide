@@ -9,4 +9,5 @@ urlpatterns = [
     path('posts', AllPosts.as_view(), name='all_posts'),
     # path('posts/<slug:slug>', view=post_details, name='post_details'),
     path('posts/<slug:slug>', PostDetails.as_view(), name='post_details'),
+    path('read_later', ReadLaterView.as_view(), name='read_later'),
 ]
