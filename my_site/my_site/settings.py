@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'blog', #Include the app you are working on
+    'storages', #This is for the django-storages to be used in AWS
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/files/' #This is how the URL will look like
+
+AWS_STORAGE_BUCKET_NAME = 'alvin-django-blog'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_ID = config('AWS_SECRET_ACCESS_ID')
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' #Tells Django how files should be stored
