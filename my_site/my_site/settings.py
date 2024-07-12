@@ -150,7 +150,7 @@ MEDIA_URL = '/files/' #This is how the URL will look like
 AWS_STORAGE_BUCKET_NAME = 'alvin-django-blog'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_ID = config('AWS_SECRET_ACCESS_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
