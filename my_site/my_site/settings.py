@@ -154,4 +154,8 @@ AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' #Tells Django how files should be stored
+STATICFILES_FOLDER = 'static' #Your name of choice. This is the folder where your static files will be stored on S3
+MEDIAFILES_FOLDER = 'media' #Your name of choice. This is the folder where your media files will be stored on S3
+
+STATICFILES_STORAGE = 'custom_storages.StaticFileStorage' #Tells Django how files should be stored
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaFileStorage'
