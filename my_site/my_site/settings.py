@@ -22,15 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('IS_DEVELOPMENT', True)
+DEBUG = config('IS_DEVELOPMENT', True)
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost',
-    os.getenv('APP_HOST')
+    config('APP_HOST')
     ]
 
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'blog', #Include the app you are working on
+    'storages', #This is for the django-storages to be used in AWS
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,12 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': config('DB_USERNAME'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT':'5432',
     }
 }
 
@@ -141,3 +146,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/files/' #This is how the URL will look like
+
+AWS_STORAGE_BUCKET_NAME = 'alvin-django-blog'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+STATICFILES_FOLDER = 'static' #Your name of choice. This is the folder where your static files will be stored on S3
+MEDIAFILES_FOLDER = 'media' #Your name of choice. This is the folder where your media files will be stored on S3
+
+STATICFILES_STORAGE = 'custom_storages.StaticFileStorage' #Tells Django how files should be stored
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaFileStorage'
