@@ -33,7 +33,8 @@
                                 </div>
                             </div>
                             <div class="meetup-actions">
-                                <a href="{{ meetup.slug}}" class="btn">View Details</a>
+                                {% comment %}<a href="/meetups/{{meetup.slug}}" class="btn">View Details</a> {% endcomment %}
+                                <a href="{% url 'meetup_details' meetup.slug %}" class="btn">View Details</a>
                             </div>
                         </article>
                     </li>
