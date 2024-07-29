@@ -1,30 +1,37 @@
+{% extends 'meetups/base/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ meetup.title }}</title>
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
+{% block title %} {{ meetup.title }} {% endblock %}
+{% block site_css %}
     <link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css' %}">
     <link rel="stylesheet" href="{% static 'meetups/styles/meetup-detail.css' %}">
-</head>
-<body>
-    <main>
+{% endblock %}
+
+
+{% block main_heading %}
+    {{ meetup.title }}
+{% endblock %}
+
+
+{% block header_content %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if meetup_found %}
         <article>
             <img src="" alt="">
-
             <section id="location">
                 <h2>Meetup Location</h2>
                 <address>
-                    This meetup will take place in <span>{{ meetup.location }}</span>. 
+                    This meetup will take place in <span>{{ meetup_location }}</span>. 
                 </address>
             </section>
 
             <section id="details">
                 <h2>What's the meetup about</h2>
-                <p>{{ meetup.description }}</p>
+                <p>{{ meetup_description }}</p>
                 <footer>
                     <p>For more information, please contact <a href="">the meetup organizer</a></p>
                 </footer>
@@ -34,6 +41,7 @@
                 FORM
             </section>
         </article>
-    </main>
-</body>
-</html>
+    {% else %}
+        <p>Meetup not found</p>
+    {% endif %}
+{% endblock %}
