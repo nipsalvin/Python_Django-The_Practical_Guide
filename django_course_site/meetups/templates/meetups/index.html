@@ -1,45 +1,28 @@
-
+{% extends 'meetups/base/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
+
+{% block title %} All Meetups {% endblock %}
+{% block site_css %}
     <link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css' %}">
-    <title>All Meetups</title>
-</head>
-<body>
-    <header id="main-header">
-        <nav><a href="/meetups" id="main-logo">Django Meet-ups</a></nav>
-        <h1>We have great meetups!</h1>
-        <p>Find one that best suits you</p>
-    </header>
-    <main>
+{% endblock %}
+
+
+{% block main_heading %}
+We have great meetups!
+{% endblock %}
+
+{% block header_content %}
+Find one that best suits you
+{% endblock %}
+
+{% block content %}
         <section>
             <h2>Upcoming Meetups</h2>
             <ol>
                 {% for meetup in meetups %}
-                    <li class="meetup-item">
-                        <article>
-                            <div class="meetup-summary">
-                                <div class="meetup-image">
-                                    <img src="" alt="Meetup">
-                                </div>
-                                <div class="meetup-details">
-                                    <h3>{{ meetup.title }}</h3>
-                                    <address>{{ meetup.location }}</address>
-                                </div>
-                            </div>
-                            <div class="meetup-actions">
-                                <a href="{{ meetup.slug}}" class="btn">View Details</a>
-                            </div>
-                        </article>
-                    </li>
+                    {% include 'meetups/includes/meetup-item.html' with title=meetup.title location='Nairobi' slug=meetup.slug image=meetup.image.url %}
                 {% endfor %}
             </ol>
         </section>
-    </main>
-</body>
-</html>
+{% endblock %}
