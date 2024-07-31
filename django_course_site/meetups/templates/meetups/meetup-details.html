@@ -21,17 +21,17 @@
 
     {% if meetup_found %}
         <article>
-            <img src="" alt="">
+            <img  id="main-image" src="{{ meetup.image.url }}" alt="{{ meetup.title }}">
             <section id="location">
                 <h2>Meetup Location</h2>
                 <address>
-                    This meetup will take place in <span>{{ meetup_location }}</span>. 
+                    This meetup will take place in <span>{{ meetup.location.name }}</span> ({{ meetup.location.address }}). 
                 </address>
             </section>
 
             <section id="details">
                 <h2>What's the meetup about</h2>
-                <p>{{ meetup_description }}</p>
+                <p>{{ meetup.description }}</p>
                 <footer>
                     <p>For more information, please contact <a href="">the meetup organizer</a></p>
                 </footer>

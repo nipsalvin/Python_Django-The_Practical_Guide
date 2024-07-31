@@ -16,9 +16,7 @@ def meetup_details(request, meetup_slug):
         meetup = Meetup.objects.get(slug=meetup_slug)
         # import ipdb; ipdb.set_trace()
         context = {
-            'meetup_title': meetup.title,
-            'meetup_description': meetup.description,
-            'meetup_location': 'Nairobi',
+            'meetup': meetup,
             'meetup_found' : True,
         }
         return render(request, 'meetups/meetup-details.html', context)
