@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .models import Meetup
+from .models import Meetup, Participant
 from .forms import RegistrationForm
 
 # Create your views here.
@@ -13,8 +13,9 @@ def index(request):
     })
 
 def meetup_details(request, meetup_slug):
-    meetup = Meetup.objects.get(slug=meetup_slug)
+    # import ipdb; ipdb.set_trace()
     try:
+        meetup = Meetup.objects.get(slug=meetup_slug)
         if request.method == 'GET':
             form = RegistrationForm()
             context = {
@@ -23,6 +24,7 @@ def meetup_details(request, meetup_slug):
                 'form': form,
             }
         elif request.method == 'POST':
+            import ipdb; ipdb.set_trace()
             form = RegistrationForm(request.POST)
             context = {
                 'meetup': meetup,
@@ -30,9 +32,12 @@ def meetup_details(request, meetup_slug):
                 'form': form,
             }
             if form.is_valid():
-                participant = form.save()
+                user_email = form.cleaned_data.get('email')
+                participant, _ = Participant.objects.get_or_create(email=user_email)
                 meetup.participants.add(participant)
                 return redirect('confirm_registration')
+            
+        import ipdb; ipdb.set_trace()
         return render(request, 'meetups/meetup-details.html', context)
     except Exception as exc:
         print(exc)
@@ -42,4 +47,5 @@ def meetup_details(request, meetup_slug):
         return render(request, 'meetups/meetup-details.html', context)
 
 def confirm_registration(request):
+    import ipdb; ipdb.set_trace()
     return render(request, 'meetups/registration-success.html')
